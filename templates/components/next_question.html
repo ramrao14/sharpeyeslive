@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h6 class="modal-title" id="quizModalLabel">{{video['brand_name']}} - {{ video['campaign_name'] }}</h6>
+  <h6 class="modal-title"> Score: <span id="quizModalScore">{{ quiz_score }}<span></h6>
+</div>
+<div class="modal-body text-center">
+{% if question %}
+  {{ question['text'] }}
+  {% for option in question['options'] %}
+    <div class="list-group list-group-light">
+      <a href="#" class="list-group-item list-group-item-action px-3 border-0 rounded-3 mb-2 list-group-item-light" 
+      hx-get="/next_question?answer={{question['answer']}}&selected_answer={{ option }}&question_id={{ question['id'] }}&video={{ video }}" hx-target="#quizBody">{{ option }}</a>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>Quiz completed!</p>
+  <p>Quiz Score: {{ quiz_score }}</p> 
+  <p>Total Score: {{ total_score }}</p>
+{% endif %}
+</div>

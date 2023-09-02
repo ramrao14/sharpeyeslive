@@ -1,0 +1,110 @@
+<html>
+<title>{% block title %}{% endblock %} - SharpEyesLive</title>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" /> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.dark.min.css" integrity="sha512-C/Z74U+ioSrVHIrPuUqKIG9HmaV5Ut9QMzxNtyMP+IeBYb5H2Uhhaxy4R0yj0Jmr9vH88nNzl490qClqbitOjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <script src="https://unpkg.com/htmx.org@1.9.5"
+    integrity="sha384-xcuj3WpfgjlKF+FXhSQFQ0ZNr39ln+hwjN3npfM9VBnUskLolQAcN80McRIVOPuO"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {% block head %}
+  {% endblock %}
+</head>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark ">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+
+      <!-- Navbar brand -->
+      <a class="navbar-brand" href="#">SharpEyesLive</a>
+
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if session['user'] %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <!-- Link -->
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('home')}}">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('play')}}">Play</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('lottery')}}">Lottery</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('refer')}}">Refer & Win</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav d-flex flex-row me-1">
+          <li class="nav-item me-3 me-lg-0 pt-1">
+            <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-mdb-toggle="dropdown"
+              aria-expanded="false" 
+              hx-get="/get_user_score" hx-target="#userScore">
+              {{session['user']['email']}}
+            </a>
+            <!-- Dropdown menu -->
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% if 'user' in session %}
+              <li>
+                <a class="dropdown-item">Score: &nbsp;
+                  <span id="userScore">
+                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </span>
+                </a>
+              </li>
+              {% endif %}
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" onclick="signOut()" hx-get="/clear_session">Logout</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+      </div>
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <body class="gradient-custom">
+
+    <!-- Navbar -->
+    <section>
+      <div class="container py-4">{% block content %}{% endblock %}</div>
+    </section>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
+  </body>
+
+</html>

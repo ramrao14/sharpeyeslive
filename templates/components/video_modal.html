@@ -1,0 +1,18 @@
+<!-- Modal -->
+<div class="modal-dialog modal-dialog-centered modal-fullscreen">
+  <div class="modal-content">
+    <div class="modal-body">
+      <div class="ratio ratio-16x9">
+        <iframe src="{{ video['embed_url'] }}" title="YouTube Video" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+        Close
+      </button>
+      <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#quizModal"
+        hx-get="/quiz_modal?video={{ video }}" hx-target="#quizModal"
+      >Play Quiz!</button>
+    </div>
+  </div>
+</div>

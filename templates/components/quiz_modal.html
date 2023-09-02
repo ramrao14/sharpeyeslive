@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div class="modal-dialog  modal-dialog-centered modal-md">
+  <div class="modal-content">
+    <div id="quizBody">
+      <div class="modal-header">
+        <h6 class="modal-title" id="quizModalLabel">{{video['brand_name']}} - {{ video['campaign_name'] }}</h6>
+        <h6 class="modal-title"> Score: <span id="quizModalScore">{{ quiz_score }}<span></h6>
+      </div>
+      <div class="modal-body text-center">
+        <p class="text-md">Answer {{ len(session['questions']) }} questions of this quiz correctly to get 30 points!</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success"
+        hx-get="/next_question?video={{ video }}" hx-target="#quizBody"
+        onclick="this.setAttribute('style', 'display: None')">Lets go!</button>
+      <button type="button" class="btn btn-outline-danger" data-mdb-dismiss="modal" data-mdb-target="#quizModal">
+        End Quiz
+      </button>
+    </div>
+  </div>
+</div>

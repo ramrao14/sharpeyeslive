@@ -1,0 +1,10 @@
+{% for ticket in tickets %}
+<tr>
+  <td>{{ ticket['id'] }}</td>
+  <td>
+    {{ ticket['num_1'] }} {{ ticket['num_2'] }} {{ ticket['num_3'] }} {{ ticket['num_4'] }} {{ ticket['num_5'] }} <b>{{ ticket['num_powerball'] }}</b>
+  </td>
+  <td>{{ ticket['issued_on'][0:10] }}</td>
+  <td>Valid</td>
+</tr>
+{% endfor %}

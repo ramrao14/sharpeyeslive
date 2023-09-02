@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Auth{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="card bg-dark text-white" style="border-radius: 1rem;">
+        <div class="card-body p-5 text-center">
+
+          {% if is_signup %}
+            <div class="mb-md-5 mt-md-4 pb-2" id="loginSection" style="display: none;">
+          {% else %}
+            <div class="mb-md-5 mt-md-4 pb-2" id="loginSection" style="display: block;">
+          {% endif %}
+            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+            <p class="text-white-50 mb-5">Please login with your registered email and password</p>
+            <form id='loginForm' name="loginForm" action="{{url_for('auth')}}" method="POST">
+              <div class="form-outline form-white mb-4">
+                <input type="email" id='userEmail' name='userEmail' class="form-control form-control-lg text-white" />
+                <label class="form-label" for="userEmail">Email</label>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                <input type="password" id='userPassword' name='userPassword'
+                  class="form-control form-control-lg text-white" />
+                <label class="form-label" for="userPassword">Password</label>
+              </div>
+              <input type="hidden" id="session" name="session" />
+
+              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+            </form>
+            <button class="btn btn-outline-light btn-lg px-5" onclick="signIn()">Login</button>
+            <div class="d-flex justify-content-center text-center mt-4 pt-1">
+              <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+              <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg px-2"></i></a>
+            </div>
+            <br>
+            <div>
+              <p class="mb-0">Don't have an account? <a onclick="displaySignup()">Sign Up</a>
+              </p>
+            </div>
+          </div>
+
+          {% if is_signup %}
+            <div class="mb-md-5 mt-md-4 pb-2" id="signupSection" style="display: block;">
+          {% else %}
+            <div class="mb-md-5 mt-md-4 pb-2" id="signupSection" style="display: none;">
+          {% endif %}
+            <h2 class="fw-bold mb-2 text-uppercase">Sign Up</h2>
+            <p class="text-white-50 mb-5">Please sign up using email and password</p>
+            <form autocomplete="off" id='signupForm' name="signupForm" action="{{url_for('auth')}}" method="POST">
+              
+              {% if is_signup and referrer %}
+              <div class="form-outline form-white mb-4">
+                <input type="text" value="{{ referrer }}" id='referrerDisplay' name='referrerDisplay' class="form-control form-control-lg text-white" readonly />
+                <label class="form-label" for="referrerDisplay">Referred By</label>
+              </div>
+              {% endif %}
+              
+              
+              <div class="form-outline form-white mb-4">
+                <input type="email" id='userEmailSignup' name='userEmailSignup' class="form-control form-control-lg text-white" autocomplete="off"/>
+                <label class="form-label" for="userEmailSignup">Email</label>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                <input type="password" id='userPasswordSignup' name='userPasswordSignup'
+                  class="form-control form-control-lg text-white" autocomplete="off"/>
+                <label class="form-label" for="userPasswordSignup">Password</label>
+              </div>
+              <input type="hidden" id="session" name="session" />
+              <input type="hidden" id="referrer" name="referrer" value="{{ referrer }}"/>
+
+            </form>
+            <button class="btn btn-outline-light btn-lg px-5" onclick="signUp()">Sign Up</button>
+            <div class="d-flex justify-content-center text-center mt-4 pt-1">
+              <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+              <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg px-2"></i></a>
+            </div>
+            <br>
+            <div>
+              <p class="mb-0">Already have an account? <a onclick="displayLogin()">Login</a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

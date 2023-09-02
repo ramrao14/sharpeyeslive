@@ -1,0 +1,27 @@
+.gradient-custom {
+  background: #6a11cb;
+  background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+  background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+
+.brand-logo {
+  max-width: 150px;
+  max-height: 60px;
+  min-height: 60px;
+  min-width: 100px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px RGBA(51,45,45,var(--mdb-bg-opacity,1)) inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px RGBA(51,45,45,var(--mdb-bg-opacity,1)) inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px RGBA(51,45,45,var(--mdb-bg-opacity,1)) inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
