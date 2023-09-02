@@ -70,7 +70,8 @@ def refer():
     auth_link = f'{request.host_url[:-1]}{url_for("auth")}'
     user_email = session['user']['email']
     referral_link = f'{auth_link}?signup&referrer={user_email}'
-    return render_template('refer.html', referral_link=referral_link)
+    referral_text = f'SharpEyesLive referral from {session["user"]["user_metadata"]["name"]} '
+    return render_template('refer.html', referral_link=referral_link, referral_text=referral_text)
 
 @app.route("/lottery")
 def lottery():
