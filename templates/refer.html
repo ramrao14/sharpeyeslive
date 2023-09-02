@@ -12,19 +12,19 @@
           <h6 class="fw-bold mb-2 py-2">Share this link with friends and family and earn 15 points when they sign up!</h6>
 
           <div class="form-outline input-group">
-            <input class="form-control" id="referralLink" type="text" value="{{ referral_link }}" readonly />
+            <input class="form-control" id="referralLink" type="text" value="{{ referral['link'] }}" readonly />
             <div class="input-group-append">
-                <button class="btn input-group-text" value="{{ referral_link }}" id="copyReferralLink" onclick="navigator.clipboard.writeText(this.value)">Copy</button>
+                <button class="btn input-group-text" value="{{ referral['link'] }}" id="copyReferralLink" onclick="navigator.clipboard.writeText(this.value)">Copy</button>
             </div>
           </div>
 
           <div class="container my-5">
             <div class="row text-center">
               <div class="col">
-                <a class="fab fa-whatsapp fa-2x" target="_blank" rel="noopener noreferrer" href="https://api.whatsapp.com/send?text={{ referral_text }}{{ referral_link }}" style="cursor:pointer; text-decoration: none;"></a>
+                <a class="fab fa-whatsapp fa-2x" target="_blank" rel="noopener noreferrer" href="{{ referral['whatsapp'] }}" style="cursor:pointer; text-decoration: none;"></a>
               </div>
               <div class="col">
-                <a class="fas fa-envelope fa-2x" target="_blank" rel="noopener noreferrer" href="mailto:?subject={{ referral_text }}&body={{ referral_link }}" style="cursor:pointer; text-decoration: none;"></a>
+                <a class="fas fa-envelope fa-2x" target="_blank" rel="noopener noreferrer" href="{{ referral['email'] }}" style="cursor:pointer; text-decoration: none;"></a>
               </div>
               <div class="col">
                 <a class="fab fa-instagram fa-2x" style="cursor:not-allowed;"></a>

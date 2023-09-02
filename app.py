@@ -69,9 +69,14 @@ def play():
 def refer():
     auth_link = f'{request.host_url[:-1]}{url_for("auth")}'
     user_email = session['user']['email']
-    referral_link = f'{auth_link}?signup&referrer={user_email}'
-    referral_text = f'SharpEyesLive referral from {session["user"]["user_metadata"]["name"]} '
-    return render_template('refer.html', referral_link=referral_link, referral_text=referral_text)
+    referral_link = f'{auth_link}?referrer={user_email}&signup'
+    referral_text = f'SharpEyesLive referral from {session["user"]["user_metadata"]["name"]}'
+    referral = {
+        'link': referral_link,
+        'whatsapp': f'https://api.whatsapp.com/send?text={referral_text}: {referral_link}',
+        'email': f'mailto:?subject={referral_text}&body={ referral_link }',
+    }
+    return render_template('refer.html', referral=referral)
 
 @app.route("/lottery")
 def lottery():
