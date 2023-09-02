@@ -7,13 +7,13 @@ import supabase as db
 
 app = Flask(__name__)
 app.secret_key = 'bla'
-app.jinja_env.globals.update(__builtins__.__dict__)
+# app.jinja_env.globals.update(__builtins__.__dict__)
 
 
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kws):
-        if not session['user']:
+        if 'user' not in session:
             return redirect(url_for('auth'))
         return f(*args, **kws)
     return decorated_function
