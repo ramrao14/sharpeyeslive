@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, session, request
 from functools import wraps
 import json
-from util import jinja_to_dict
 import supabase as db
 
 
@@ -9,6 +8,8 @@ app = Flask(__name__)
 app.secret_key = 'bla'
 # app.jinja_env.globals.update(__builtins__.__dict__)
 
+def jinja_to_dict(str_dict):
+  return json.loads(str_dict.replace('\'', '\"'))
 
 def login_required(f):
     @wraps(f)
@@ -121,7 +122,7 @@ def quiz_modal():
     questions = db.get_questions(video['id'], video['active_sequence'])
     quiz_score = db.get_quiz_score(session['user']['id'], video['id'])
     session['questions'] = questions
-    return render_template('components/quiz_modal.html', video=video, quiz_score=quiz_score)
+    return render_template('components/quiz_modal.html', video=video, num_questions=len(session['questions']), quiz_score=quiz_score)
 
 
 @app.route("/video_modal")
